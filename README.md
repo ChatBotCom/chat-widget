@@ -113,6 +113,18 @@ BE_API.onLoad = function () {
 };
 ```
 
+#### resetSession
+
+Reset current session and recreate widget.
+
+```javascript
+var BE_API = window.BE_API || {};
+
+BE_API.onLoad = function () {
+    BE_API.resetSession();
+};
+```
+
 #### openChat
 
 Open the chat window, should be used only inside BE_API.onLoad callback
