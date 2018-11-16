@@ -211,8 +211,7 @@ window.BE_API.onLoad = () => {
 
 ### sendMessage
 
-Send a message as visitor
-
+Send a message as visitor.
 
 
 ##### Payload
@@ -237,7 +236,7 @@ window.BE_API.onLoad = () => {
 
 ### sendTrigger
 
-Trigger interaction
+Trigger the specific interaction.
 
 #### Payload
 
