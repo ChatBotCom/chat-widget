@@ -1,8 +1,31 @@
 # Chat Widget API
 
-## Events
+- [Chat Widget API](#chat-widget-api)
+  * [Hooks](#hooks)
+    + [onBeforeLoad](#onbeforeload)
+    + [onLoad](#onload)
+    + [onCreate](#oncreate)
+    + [onDestroy](#ondestroy)
+    + [onChatWindowOpen](#onchatwindowopen)
+    + [onChatWindowClose](#onchatwindowclose)
+    + [onMessage](#onmessage)
+  * [Methods](#methods)
+    + [create](#create)
+    + [destroy](#destroy)
+    + [resetSession](#resetsession)
+    + [openChat](#openchat)
+    + [closeChat](#closechat)
+    + [setCustomParameters](#setcustomparameters)
+      - [Payload](#payload)
+      - [Entry Object](#entry-object)
+    + [sendMessage](#sendmessage)
+        * [Payload](#payload-1)
+    + [sendTrigger](#sendtrigger)
+      - [Payload](#payload-2)
 
-#### onBeforeLoad
+## Hooks
+
+### onBeforeLoad
 
 Callback function invoked when widget code is loaded but chat window is not rendered yet.
 You can return `false` to stop the widget initialization.
@@ -15,7 +38,7 @@ BE_API.onBeforeLoad = function () {
 };
 ```
 
-#### onLoad
+### onLoad
 
 Callback function invoked when widget code is loaded and chat window is rendered.
 
@@ -27,7 +50,7 @@ BE_API.onLoad = function () {
 };
 ```
 
-#### onCreate
+### onCreate
 
 Callback function invoked after `create()` API method call.
 
@@ -39,7 +62,7 @@ BE_API.onCreate = function () {
 };
 ```
 
-#### onDestroy
+### onDestroy
 
 Callback function invoked after `destroy()` API method call.
 
@@ -51,7 +74,7 @@ BE_API.onDestroy = function () {
 };
 ```
 
-#### onChatWindowOpen
+### onChatWindowOpen
 
 Callback function invoked when the chat window is opened.
 
@@ -63,7 +86,7 @@ BE_API.onChatWindowOpen = function () {
 };
 ```
 
-#### onChatWindowClose
+### onChatWindowClose
 
 Callback function invoked when the chat window is closed.
 
@@ -75,7 +98,7 @@ BE_API.onChatWindowClose = function () {
 };
 ```
 
-#### onMessage
+### onMessage
 
 Callback function invoked after query result.
 
@@ -87,9 +110,11 @@ BE_API.onMessage = function (result) {
 };
 ```
 
+
+
 ## Methods
 
-#### create
+### create
 
 Create chat widget if does not exist
 
@@ -101,7 +126,7 @@ BE_API.onLoad = function () {
 };
 ```
 
-#### destroy
+### destroy
 
 Destroy chat widget if exist
 
@@ -113,7 +138,7 @@ BE_API.onLoad = function () {
 };
 ```
 
-#### resetSession
+### resetSession
 
 Reset current session and recreate widget.
 
@@ -125,7 +150,7 @@ BE_API.onLoad = function () {
 };
 ```
 
-#### openChat
+### openChat
 
 Open the chat window, should be used only inside BE_API.onLoad callback
 
@@ -137,7 +162,7 @@ BE_API.onLoad = function () {
 };
 ```
 
-#### closeChat
+### closeChat
 
 Close the chat window, should be used only inside BE_API.onLoad callback
 
@@ -149,11 +174,29 @@ BE_API.onLoad = function () {
 };
 ```
 
-#### setCustomParameters
+### setCustomParameters
 
 Set your custom parameters that will be sent to the query.
 Each method call will overwrite existing parameters.
 Read more about parameters here: https://www.botengine.ai/docs/talk-with-bot#parameters
+
+#### Payload
+
+
+| parameter  | type              | description                                                  |
+| ---------- | ----------------- | ------------------------------------------------------------ |
+| `Object` | Object( [Entry Object](#entry-object)(1, 99) ) `required` | Object with entries                    |
+
+
+
+#### Entry Object
+
+| parameter  | type              | description                                                  |
+| ---------- | ----------------- | ------------------------------------------------------------ |
+| `key` | String(1, 128) | Parameter name                         |
+| `value` | String(1, 1024) | Parameter value |
+
+
 
 ```javascript
 var BE_API = window.BE_API || {};
@@ -163,5 +206,49 @@ window.BE_API.onLoad = () => {
         email: 'support@botengine.ai',
         name: 'Botengine Support'
     })
+}
+```
+
+### sendMessage
+
+Send a message as visitor
+
+
+
+##### Payload
+
+
+| parameter  | type              | description                                                  |
+| ---------- | ----------------- | ------------------------------------------------------------ |
+| `payload.message` | String(1, 256) `required` | Message                                |
+| `payload.postback` | String(1, 256) | Postback |
+
+
+```javascript
+var BE_API = window.BE_API || {};
+
+window.BE_API.onLoad = () => {
+    window.BE_API.sendMessage({
+        message: 'message',
+        postback: 'postback'
+    })
+}
+```
+
+### sendTrigger
+
+Trigger interaction
+
+#### Payload
+
+| parameter  | type              | description                                                  |
+| ---------- | ----------------- | ------------------------------------------------------------ |
+| `payload`  | String(1, 50) `required` | Trigger name                           |
+
+```javascript
+var BE_API = window.BE_API || {};
+
+window.BE_API.onLoad = () => {
+    window.BE_API.sendTrigger('custom_trigger')
 }
 ```
