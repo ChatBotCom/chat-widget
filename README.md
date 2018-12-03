@@ -110,6 +110,17 @@ BE_API.onMessage = function (result) {
 };
 ```
 
+### onStartConversation
+
+Callback function invoked after the conversation starts.
+
+```javascript
+var BE_API = window.BE_API || {};
+
+BE_API.onStartConversation = function () {
+    // ...
+};
+```
 
 
 ## Methods
