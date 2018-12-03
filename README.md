@@ -9,6 +9,7 @@
     + [onChatWindowOpen](#onchatwindowopen)
     + [onChatWindowClose](#onchatwindowclose)
     + [onMessage](#onmessage)
+    + [onStartConversation][#onstartconversation]
   * [Methods](#methods)
     + [create](#create)
     + [destroy](#destroy)
