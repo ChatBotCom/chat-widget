@@ -32,9 +32,9 @@ Callback function invoked when widget code is loaded but chat window is not rend
 You can return `false` to stop the widget initialization.
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onBeforeLoad = function () {
+window.BE_API.onBeforeLoad = function () {
     // return false
 };
 ```
@@ -44,9 +44,9 @@ BE_API.onBeforeLoad = function () {
 Callback function invoked when widget code is loaded and chat window is rendered.
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onLoad = function () {
+window.BE_API.onLoad = function () {
     // ...
 };
 ```
@@ -56,9 +56,9 @@ BE_API.onLoad = function () {
 Callback function invoked after `create()` API method call.
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onCreate = function () {
+window.BE_API.onCreate = function () {
     // ...
 };
 ```
@@ -68,9 +68,9 @@ BE_API.onCreate = function () {
 Callback function invoked after `destroy()` API method call.
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onDestroy = function () {
+window.BE_API.onDestroy = function () {
     // ...
 };
 ```
@@ -80,9 +80,9 @@ BE_API.onDestroy = function () {
 Callback function invoked when the chat window is opened.
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onChatWindowOpen = function () {
+window.BE_API.onChatWindowOpen = function () {
     // ...
 };
 ```
@@ -92,9 +92,9 @@ BE_API.onChatWindowOpen = function () {
 Callback function invoked when the chat window is closed.
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onChatWindowClose = function () {
+window.BE_API.onChatWindowClose = function () {
     // ...
 };
 ```
@@ -104,9 +104,9 @@ BE_API.onChatWindowClose = function () {
 Callback function invoked after query result.
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onMessage = function (result) {
+window.BE_API.onMessage = function (result) {
     console.log(result)
 };
 ```
@@ -116,9 +116,9 @@ BE_API.onMessage = function (result) {
 Callback function invoked after the conversation starts.
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onStartConversation = function () {
+window.BE_API.onStartConversation = function () {
     // ...
 };
 ```
@@ -131,10 +131,10 @@ BE_API.onStartConversation = function () {
 Create chat widget if does not exist
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onLoad = function () {
-    BE_API.create();
+window.BE_API.onLoad = function () {
+    window.BE_API.create();
 };
 ```
 
@@ -143,10 +143,10 @@ BE_API.onLoad = function () {
 Destroy chat widget if exist
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onLoad = function () {
-    BE_API.destroy();
+window.BE_API.onLoad = function () {
+    window.BE_API.destroy();
 };
 ```
 
@@ -155,34 +155,34 @@ BE_API.onLoad = function () {
 Reset current session and recreate widget.
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onLoad = function () {
-    BE_API.resetSession();
+window.BE_API.onLoad = function () {
+    window.BE_API.resetSession();
 };
 ```
 
 ### openChat
 
-Open the chat window, should be used only inside BE_API.onLoad callback
+Open the chat window, should be used only inside window.BE_API.onLoad callback
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onLoad = function () {
-    BE_API.openChat();
+window.BE_API.onLoad = function () {
+    window.BE_API.openChat();
 };
 ```
 
 ### closeChat
 
-Close the chat window, should be used only inside BE_API.onLoad callback
+Close the chat window, should be used only inside window.BE_API.onLoad callback
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
-BE_API.onLoad = function () {
-    BE_API.closeChat();
+window.BE_API.onLoad = function () {
+    window.BE_API.closeChat();
 };
 ```
 
@@ -211,7 +211,7 @@ Read more about parameters here: https://www.botengine.ai/docs/talk-with-bot#par
 
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
 window.BE_API.onLoad = () => {
     window.BE_API.setCustomParameters({
@@ -236,7 +236,7 @@ Send a message as visitor.
 
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
 window.BE_API.onLoad = () => {
     window.BE_API.sendMessage({
@@ -257,7 +257,7 @@ Trigger the specific interaction.
 | `payload`  | String(1, 50) `required` | Trigger name                           |
 
 ```javascript
-var BE_API = window.BE_API || {};
+window.BE_API = window.BE_API || {};
 
 window.BE_API.onLoad = () => {
     window.BE_API.sendTrigger('custom_trigger')
