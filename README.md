@@ -13,16 +13,16 @@
   * [Methods](#methods)
     + [create](#create)
     + [destroy](#destroy)
+    + [isInitialized](#isInitialized)
     + [resetSession](#resetsession)
     + [openChat](#openchat)
     + [closeChat](#closechat)
+    + [isChatOpened](#isChatOpened)
+    + [isChatClosed](#isChatClosed)
     + [setCustomParameters](#setcustomparameters)
-      - [Payload](#payload)
-      - [Entry Object](#entry-object)
+    + [setUserParameters](#setUserParameters)
     + [sendMessage](#sendmessage)
-        * [Payload](#payload-1)
     + [sendTrigger](#sendtrigger)
-      - [Payload](#payload-2)
 
 ## Hooks
 
@@ -150,6 +150,17 @@ window.BE_API.onLoad = function () {
 };
 ```
 
+### isInitialized
+Returns `true` if the chat is initialized.
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onLoad = function () {
+    window.BE_API.isInitialized();
+};
+```
+
 ### resetSession
 
 Reset current session and recreate widget.
@@ -186,6 +197,32 @@ window.BE_API.onLoad = function () {
 };
 ```
 
+### isChatOpened
+
+Should be used only inside window.BE_API.onLoad callback.
+Returns `true` if the chat window is open.
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onLoad = function () {
+    window.BE_API.isChatOpened();
+};
+```
+
+### isChatClosed
+
+Should be used only inside window.BE_API.onLoad callback.
+Returns `true` if the chat window is closed.
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onLoad = function () {
+    window.BE_API.isChatClosed();
+};
+```
+
 ### setCustomParameters
 
 Set your custom parameters that will be sent to the query.
@@ -215,6 +252,41 @@ window.BE_API = window.BE_API || {};
 
 window.BE_API.onLoad = () => {
     window.BE_API.setCustomParameters({
+        email: 'support@botengine.ai',
+        name: 'Botengine Support'
+    })
+}
+```
+
+### setUserParameters
+
+Set user parameters. Read more about user parameters here:
+
+https://www.chatbot.com/docs/users#update-user
+
+#### Payload
+
+
+| parameter | type                                                      | description         |
+| --------- | --------------------------------------------------------- | ------------------- |
+| `Object`  | Object( [Entry Object](#entry-object)(1, 99) ) `required` | Object with entries |
+
+
+
+#### Entry Object
+
+| parameter | type            | description     |
+| --------- | --------------- | --------------- |
+| `key`     | String(1, 128)  | Parameter name  |
+| `value`   | String(1, 1024) | Parameter value |
+
+
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onLoad = () => {
+    window.BE_API.setUserParameters({
         email: 'support@botengine.ai',
         name: 'Botengine Support'
     })
