@@ -8,6 +8,7 @@
     + [onDestroy](#ondestroy)
     + [onChatWindowOpen](#onchatwindowopen)
     + [onChatWindowClose](#onchatwindowclose)
+    + [onChatWindowHide](#onChatWindowHide)
     + [onMessage](#onmessage)
     + [onStartConversation](#onstartconversation)
   * [Methods](#methods)
@@ -15,14 +16,20 @@
     + [destroy](#destroy)
     + [isInitialized](#isInitialized)
     + [resetSession](#resetsession)
-    + [openChat](#openchat)
-    + [closeChat](#closechat)
-    + [isChatOpened](#isChatOpened)
-    + [isChatClosed](#isChatClosed)
-    + [setCustomParameters](#setcustomparameters)
-    + [setUserParameters](#setUserParameters)
+    + `deprecated` [openChat](#openchat)
+    + [openChatWindow](#openChatWindow)
+    + `deprecated` [closeChat](#closechat)
+    + [closeChatWindow](#closeChatWindow)
+    + [hideChatWindow](#hideChatWindow)
+    + [isChatWindowOpened](#isChatWindowOpened)
+    + [isChatWindowClosed](#isChatWindowClosed)
+    + [isChatWindowHidden](#isChatWindowHidden)
     + [sendMessage](#sendmessage)
     + [sendTrigger](#sendtrigger)
+    + `deprecated` [setUserParameters](#setUserParameters)
+    + [setUserAttributes](#setUserAttributes)
+    + `deprecated` [setCustomParameters](#setcustomparameters)
+    + [setSessionAttributes](#setSessionAttributes)
 
 ## Hooks
 
@@ -95,6 +102,18 @@ Callback function invoked when the chat window is closed.
 window.BE_API = window.BE_API || {};
 
 window.BE_API.onChatWindowClose = function () {
+    // ...
+};
+```
+
+### onChatWindowHide
+
+Callback function invoked when the chat window is hidden.
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onChatWindowHide = function () {
     // ...
 };
 ```
@@ -175,17 +194,25 @@ window.BE_API.onLoad = function () {
 
 ### openChat
 
+Deprecated, use: [openChatWindow](#openChatWindow)
+
+### openChatWindow
+
 Open the chat window, should be used only inside window.BE_API.onLoad callback
 
 ```javascript
 window.BE_API = window.BE_API || {};
 
 window.BE_API.onLoad = function () {
-    window.BE_API.openChat();
+    window.BE_API.openChatWindow();
 };
 ```
 
 ### closeChat
+
+Deprecated, use: [closeChatWindow](#closeChatWindow)
+
+### closeChatWindow
 
 Close the chat window, should be used only inside window.BE_API.onLoad callback
 
@@ -193,11 +220,23 @@ Close the chat window, should be used only inside window.BE_API.onLoad callback
 window.BE_API = window.BE_API || {};
 
 window.BE_API.onLoad = function () {
-    window.BE_API.closeChat();
+    window.BE_API.closeChatWindow();
 };
 ```
 
-### isChatOpened
+### hideChatWindow
+
+Hide the chat window, should be used only inside window.BE_API.onLoad callback
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onLoad = function () {
+    window.BE_API.hideChatWindow();
+};
+```
+
+### isChatWindowOpened
 
 Should be used only inside window.BE_API.onLoad callback.
 Returns `true` if the chat window is open.
@@ -206,11 +245,11 @@ Returns `true` if the chat window is open.
 window.BE_API = window.BE_API || {};
 
 window.BE_API.onLoad = function () {
-    window.BE_API.isChatOpened();
+    window.BE_API.isChatWindowOpened();
 };
 ```
 
-### isChatClosed
+### isChatWindowClosed
 
 Should be used only inside window.BE_API.onLoad callback.
 Returns `true` if the chat window is closed.
@@ -219,48 +258,30 @@ Returns `true` if the chat window is closed.
 window.BE_API = window.BE_API || {};
 
 window.BE_API.onLoad = function () {
-    window.BE_API.isChatClosed();
+    window.BE_API.isChatWindowClosed();
 };
 ```
 
-### setCustomParameters
+### isChatWindowHidden
 
-Set your custom parameters that will be sent to the query.
-Each method call will overwrite existing parameters.
-Read more about parameters here: https://www.botengine.ai/docs/talk-with-bot#parameters
-
-#### Payload
-
-
-| parameter  | type              | description                                                  |
-| ---------- | ----------------- | ------------------------------------------------------------ |
-| `Object` | Object( [Entry Object](#entry-object)(1, 99) ) `required` | Object with entries                    |
-
-
-
-#### Entry Object
-
-| parameter  | type              | description                                                  |
-| ---------- | ----------------- | ------------------------------------------------------------ |
-| `key` | String(1, 128) | Parameter name                         |
-| `value` | String(1, 1024) | Parameter value |
-
-
+Should be used only inside window.BE_API.onLoad callback.
+Returns `true` if the chat window is hidden.
 
 ```javascript
 window.BE_API = window.BE_API || {};
 
-window.BE_API.onLoad = () => {
-    window.BE_API.setCustomParameters({
-        email: 'support@botengine.ai',
-        name: 'Botengine Support'
-    })
-}
+window.BE_API.onLoad = function () {
+    window.BE_API.isChatWindowHidden();
+};
 ```
 
-### setUserParameters
+###  setUserParameters
 
-Set user parameters. Read more about user parameters here:
+Deprecated, use: [setUserAttributes](#setUserAttributes)
+
+###  setUserAttributes
+
+Set user attributes. Read more about user attributes here:
 
 https://www.chatbot.com/docs/users#update-user
 
@@ -277,8 +298,8 @@ https://www.chatbot.com/docs/users#update-user
 
 | parameter | type            | description     |
 | --------- | --------------- | --------------- |
-| `key`     | String(1, 128)  | Parameter name  |
-| `value`   | String(1, 1024) | Parameter value |
+| `key`     | String(1, 128)  | Attribute name  |
+| `value`   | String(1, 1024) | Attribute value |
 
 
 
@@ -286,12 +307,53 @@ https://www.chatbot.com/docs/users#update-user
 window.BE_API = window.BE_API || {};
 
 window.BE_API.onLoad = () => {
-    window.BE_API.setUserParameters({
+    window.BE_API.setUserAttributes({
         email: 'support@botengine.ai',
         name: 'Botengine Support'
     })
 }
 ```
+
+### setCustomParameters
+
+Deprecated, use: [setSessionAttributes](#setSessionAttributes)
+
+### setSessionAttributes
+
+Set your custom attributes that will be sent to the query.
+Each method call will overwrite existing parameters.
+Read more about attributes here: https://www.botengine.ai/docs/talk-with-bot#parameters
+
+#### Payload
+
+
+| parameter  | type              | description                                                  |
+| ---------- | ----------------- | ------------------------------------------------------------ |
+| `Object` | Object( [Entry Object](#entry-object)(1, 99) ) `required` | Object with entries                    |
+
+
+
+#### Entry Object
+
+| parameter  | type              | description                                                  |
+| ---------- | ----------------- | ------------------------------------------------------------ |
+| `key` | String(1, 128) | Attribute name                         |
+| `value` | String(1, 1024) | Attribute value |
+
+
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onLoad = () => {
+    window.BE_API.setSessionAttributes({
+        email: 'support@botengine.ai',
+        name: 'Botengine Support'
+    })
+}
+```
+
+
 
 ### sendMessage
 
