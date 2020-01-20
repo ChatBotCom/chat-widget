@@ -1,35 +1,44 @@
 # Chat Widget API
 
-- [Chat Widget API](#chat-widget-api)
-  * [Hooks](#hooks)
-    + [onBeforeLoad](#onbeforeload)
-    + [onLoad](#onload)
-    + [onCreate](#oncreate)
-    + [onDestroy](#ondestroy)
-    + [onChatWindowOpen](#onchatwindowopen)
-    + [onChatWindowClose](#onchatwindowclose)
-    + [onChatWindowHide](#onChatWindowHide)
-    + [onMessage](#onmessage)
-    + [onStartConversation](#onstartconversation)
-  * [Methods](#methods)
-    + [create](#create)
-    + [destroy](#destroy)
-    + [isInitialized](#isInitialized)
-    + [resetSession](#resetsession)
-    + `deprecated` [openChat](#openchat)
-    + [openChatWindow](#openChatWindow)
-    + `deprecated` [closeChat](#closechat)
-    + [closeChatWindow](#closeChatWindow)
-    + [hideChatWindow](#hideChatWindow)
-    + [isChatWindowOpened](#isChatWindowOpened)
-    + [isChatWindowClosed](#isChatWindowClosed)
-    + [isChatWindowHidden](#isChatWindowHidden)
-    + [sendMessage](#sendmessage)
-    + [sendTrigger](#sendtrigger)
-    + `deprecated` [setUserParameters](#setUserParameters)
-    + [setUserAttributes](#setUserAttributes)
-    + `deprecated` [setCustomParameters](#setcustomparameters)
-    + [setSessionAttributes](#setSessionAttributes)
+   * [Chat Widget API](#chat-widget-api)
+      * [Hooks](#hooks)
+         * [onBeforeLoad](#onbeforeload)
+         * [onLoad](#onload)
+         * [onCreate](#oncreate)
+         * [onDestroy](#ondestroy)
+         * [onChatWindowOpen](#onchatwindowopen)
+         * [onChatWindowClose](#onchatwindowclose)
+         * [onChatWindowHide](#onchatwindowhide)
+         * [onMessage](#onmessage)
+         * [onStartConversation](#onstartconversation)
+      * [Methods](#methods)
+         * [create](#create)
+         * [destroy](#destroy)
+         * [openChatWindow](#openchatwindow)
+         * [closeChatWindow](#closechatwindow)
+         * [hideChatWindow](#hidechatwindow)
+         * [isChatWindowOpened](#ischatwindowopened)
+         * [isChatWindowClosed](#ischatwindowclosed)
+         * [isChatWindowHidden](#ischatwindowhidden)
+         * [isInitialized](#isinitialized)
+         * [resetSession](#resetsession)
+         * [sendMessage](#sendmessage)
+               * [Payload](#payload)
+         * [sendTrigger](#sendtrigger)
+            * [Payload](#payload-1)
+         * [openMoment](#openmoment)
+         * [closeMoment](#closemoment)
+         * [setSessionAttributes](#setsessionattributes)
+            * [Payload](#payload-2)
+            * [Entry Object](#entry-object)
+         * [setUserAttributes](#setuserattributes)
+            * [Payload](#payload-3)
+            * [Entry Object](#entry-object-1)
+         * [getUserData](#getuserdata)
+         * [endChat](#endchat)
+         * [hideGreeting](#hidegreeting)
+         * [showGreeting](#showgreeting)
+
 
 ## Hooks
 
@@ -169,33 +178,6 @@ window.BE_API.onLoad = function () {
 };
 ```
 
-### isInitialized
-Returns `true` if the chat is initialized.
-
-```javascript
-window.BE_API = window.BE_API || {};
-
-window.BE_API.onLoad = function () {
-    window.BE_API.isInitialized();
-};
-```
-
-### resetSession
-
-Reset current session and recreate widget.
-
-```javascript
-window.BE_API = window.BE_API || {};
-
-window.BE_API.onLoad = function () {
-    window.BE_API.resetSession();
-};
-```
-
-### openChat
-
-Deprecated, use: [openChatWindow](#openChatWindow)
-
 ### openChatWindow
 
 Open the chat window, should be used only inside window.BE_API.onLoad callback
@@ -207,10 +189,6 @@ window.BE_API.onLoad = function () {
     window.BE_API.openChatWindow();
 };
 ```
-
-### closeChat
-
-Deprecated, use: [closeChatWindow](#closeChatWindow)
 
 ### closeChatWindow
 
@@ -275,85 +253,29 @@ window.BE_API.onLoad = function () {
 };
 ```
 
-###  setUserParameters
 
-Deprecated, use: [setUserAttributes](#setUserAttributes)
-
-###  setUserAttributes
-
-Set user attributes. Read more about user attributes here:
-
-https://www.chatbot.com/docs/users#update-user
-
-#### Payload
-
-
-| parameter | type                                                      | description         |
-| --------- | --------------------------------------------------------- | ------------------- |
-| `Object`  | Object( [Entry Object](#entry-object)(1, 99) ) `required` | Object with entries |
-
-
-
-#### Entry Object
-
-| parameter | type            | description     |
-| --------- | --------------- | --------------- |
-| `key`     | String(1, 128)  | Attribute name  |
-| `value`   | String(1, 1024) | Attribute value |
-
-
+### isInitialized
+Returns `true` if the chat is initialized.
 
 ```javascript
 window.BE_API = window.BE_API || {};
 
-window.BE_API.onLoad = () => {
-    window.BE_API.setUserAttributes({
-        email: 'support@botengine.ai',
-        name: 'Botengine Support'
-    })
-}
+window.BE_API.onLoad = function () {
+    window.BE_API.isInitialized();
+};
 ```
 
-### setCustomParameters
+### resetSession
 
-Deprecated, use: [setSessionAttributes](#setSessionAttributes)
-
-### setSessionAttributes
-
-Set your custom attributes that will be sent to the query.
-Each method call will overwrite existing parameters.
-Read more about attributes here: https://www.botengine.ai/docs/talk-with-bot#parameters
-
-#### Payload
-
-
-| parameter  | type              | description                                                  |
-| ---------- | ----------------- | ------------------------------------------------------------ |
-| `Object` | Object( [Entry Object](#entry-object)(1, 99) ) `required` | Object with entries                    |
-
-
-
-#### Entry Object
-
-| parameter  | type              | description                                                  |
-| ---------- | ----------------- | ------------------------------------------------------------ |
-| `key` | String(1, 128) | Attribute name                         |
-| `value` | String(1, 1024) | Attribute value |
-
-
+Reset current session and recreate widget.
 
 ```javascript
 window.BE_API = window.BE_API || {};
 
-window.BE_API.onLoad = () => {
-    window.BE_API.setSessionAttributes({
-        email: 'support@botengine.ai',
-        name: 'Botengine Support'
-    })
-}
+window.BE_API.onLoad = function () {
+    window.BE_API.resetSession();
+};
 ```
-
-
 
 ### sendMessage
 
@@ -397,3 +319,130 @@ window.BE_API.onLoad = () => {
     window.BE_API.sendTrigger('custom_trigger')
 }
 ```
+
+### openMoment
+Open moment.
+
+
+##### Payload
+
+
+| parameter  | type              | description                                                  |
+| ---------- | ----------------- | ------------------------------------------------------------ |
+| `payload.url` | String(1, 2048) `required` | Url                             |
+| `payload.height` | String(`full`, `tall`, `compact`) | Height |
+
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onLoad = () => {
+    window.BE_API.openMoment({
+        url: 'https://exampledomain.com',
+        height: 'tall'
+    })
+}
+```
+
+### closeMoment
+Closes opened "moment"
+
+### setSessionAttributes
+
+Set your custom attributes that will be sent to the query.
+Each method call will overwrite existing parameters.
+Read more about attributes here: https://www.chatbot.com/docs/talk-with-bot/#parameters
+
+#### Payload
+
+
+| parameter  | type              | description                                                  |
+| ---------- | ----------------- | ------------------------------------------------------------ |
+| `Object` | Object( [Entry Object](#entry-object)(1, 99) ) `required` | Object with entries                    |
+
+
+
+#### Entry Object
+
+| parameter  | type              | description                                                  |
+| ---------- | ----------------- | ------------------------------------------------------------ |
+| `key` | String(1, 128) | Attribute name                         |
+| `value` | String(1, 1024) | Attribute value |
+
+
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onLoad = () => {
+    window.BE_API.setSessionAttributes({
+        email: 'support@chatbot.com',
+        name: 'ChatBot Support'
+    })
+}
+```
+
+###  setUserAttributes
+
+Set user attributes. Read more about user attributes here:
+
+https://www.chatbot.com/docs/users#update-user
+
+#### Payload
+
+
+| parameter | type                                                      | description         |
+| --------- | --------------------------------------------------------- | ------------------- |
+| `Object`  | Object( [Entry Object](#entry-object)(1, 99) ) `required` | Object with entries |
+
+
+
+#### Entry Object
+
+| parameter | type            | description     |
+| --------- | --------------- | --------------- |
+| `key`     | String(1, 128)  | Attribute name  |
+| `value`   | String(1, 1024) | Attribute value |
+
+
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onLoad = () => {
+    window.BE_API.setUserAttributes({
+        email: 'support@chatbot.com',
+        name: 'ChatBot Support'
+    })
+}
+```
+
+### getUserData
+Returns the data of the current user.
+
+### endChat
+Ends an active conversation.
+
+### hideGreeting
+Hides active greeting
+
+### showGreeting
+Shows greeting.
+
+
+##### Payload
+
+
+| parameter  | type              | description                                                  |
+| ---------- | ----------------- | ------------------------------------------------------------ |
+| `message` | String(1, 256) `required` | Greeting message              |
+
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onLoad = () => {
+    window.BE_API.showGreeting('Greeting message')
+}
+```
+
