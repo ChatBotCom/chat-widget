@@ -11,6 +11,9 @@
          * [onChatWindowHide](#onchatwindowhide)
          * [onMessage](#onmessage)
          * [onStartConversation](#onstartconversation)
+         * [onMomentOpen](#onmomentopen)
+         * [onMomentClose](#onmomentclose)
+         * [onMomentLoad](#onmomentload)
       * [Methods](#methods)
          * [create](#create)
          * [destroy](#destroy)
@@ -23,7 +26,7 @@
          * [isInitialized](#isinitialized)
          * [resetSession](#resetsession)
          * [sendMessage](#sendmessage)
-               * [Payload](#payload)
+            * [Payload](#payload)
          * [sendTrigger](#sendtrigger)
             * [Payload](#payload-1)
          * [openMoment](#openmoment)
@@ -147,6 +150,42 @@ Callback function invoked after the conversation starts.
 window.BE_API = window.BE_API || {};
 
 window.BE_API.onStartConversation = function () {
+    // ...
+};
+```
+
+### onMomentOpen
+
+Callback function invoked after the moment window is opened.
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onMomentOpen = function () {
+    // ...
+};
+```
+
+### onMomentClose
+
+Callback function invoked after the moment window is closed.
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onMomentClose = function () {
+    // ...
+};
+```
+
+### onMomentLoad
+
+Callback function invoked after the moment window is loaded.
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onMomentLoad = function () {
     // ...
 };
 ```
@@ -285,10 +324,10 @@ Send a message as visitor.
 ##### Payload
 
 
-| parameter  | type              | description                                                  |
-| ---------- | ----------------- | ------------------------------------------------------------ |
-| `payload.message` | String(1, 256) `required` | Message                                |
-| `payload.postback` | String(1, 256) | Postback |
+| parameter          | type                      | description |
+| ------------------ | ------------------------- | ----------- |
+| `payload.message`  | String(1, 256) `required` | Message     |
+| `payload.postback` | String(1, 256)            | Postback    |
 
 
 ```javascript
@@ -308,9 +347,9 @@ Trigger the specific interaction.
 
 #### Payload
 
-| parameter  | type              | description                                                  |
-| ---------- | ----------------- | ------------------------------------------------------------ |
-| `payload`  | String(1, 50) `required` | Trigger name                           |
+| parameter | type                     | description  |
+| --------- | ------------------------ | ------------ |
+| `payload` | String(1, 50) `required` | Trigger name |
 
 ```javascript
 window.BE_API = window.BE_API || {};
@@ -327,10 +366,10 @@ Open moment.
 ##### Payload
 
 
-| parameter  | type              | description                                                  |
-| ---------- | ----------------- | ------------------------------------------------------------ |
-| `payload.url` | String(1, 2048) `required` | Url                             |
-| `payload.height` | String(`full`, `tall`, `compact`) | Height |
+| parameter        | type                              | description |
+| ---------------- | --------------------------------- | ----------- |
+| `payload.url`    | String(1, 2048) `required`        | Url         |
+| `payload.height` | String(`full`, `tall`, `compact`) | Height      |
 
 
 ```javascript
@@ -356,18 +395,18 @@ Read more about attributes here: https://www.chatbot.com/docs/talk-with-bot/#par
 #### Payload
 
 
-| parameter  | type              | description                                                  |
-| ---------- | ----------------- | ------------------------------------------------------------ |
-| `Object` | Object( [Entry Object](#entry-object)(1, 99) ) `required` | Object with entries                    |
+| parameter | type                                                      | description         |
+| --------- | --------------------------------------------------------- | ------------------- |
+| `Object`  | Object( [Entry Object](#entry-object)(1, 99) ) `required` | Object with entries |
 
 
 
 #### Entry Object
 
-| parameter  | type              | description                                                  |
-| ---------- | ----------------- | ------------------------------------------------------------ |
-| `key` | String(1, 128) | Attribute name                         |
-| `value` | String(1, 1024) | Attribute value |
+| parameter | type            | description     |
+| --------- | --------------- | --------------- |
+| `key`     | String(1, 128)  | Attribute name  |
+| `value`   | String(1, 1024) | Attribute value |
 
 
 
@@ -433,9 +472,9 @@ Shows greeting.
 ##### Payload
 
 
-| parameter  | type              | description                                                  |
-| ---------- | ----------------- | ------------------------------------------------------------ |
-| `message` | String(1, 256) `required` | Greeting message              |
+| parameter | type                      | description      |
+| --------- | ------------------------- | ---------------- |
+| `message` | String(1, 256) `required` | Greeting message |
 
 
 ```javascript
@@ -445,4 +484,3 @@ window.BE_API.onLoad = () => {
     window.BE_API.showGreeting('Greeting message')
 }
 ```
-
