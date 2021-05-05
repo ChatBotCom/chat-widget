@@ -4,7 +4,6 @@
       * [Hooks](#hooks)
          * [onBeforeLoad](#onbeforeload)
          * [onLoad](#onload)
-         * [onCreate](#oncreate)
          * [onDestroy](#ondestroy)
          * [onChatWindowOpen](#onchatwindowopen)
          * [onChatWindowClose](#onchatwindowclose)
@@ -66,18 +65,6 @@ Callback function invoked when widget code is loaded and chat window is rendered
 window.BE_API = window.BE_API || {};
 
 window.BE_API.onLoad = function () {
-    // ...
-};
-```
-
-### onCreate
-
-Callback function invoked after `create()` API method call.
-
-```javascript
-window.BE_API = window.BE_API || {};
-
-window.BE_API.onCreate = function () {
     // ...
 };
 ```
