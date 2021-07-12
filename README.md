@@ -5,6 +5,7 @@
          * [onBeforeLoad](#onbeforeload)
          * [onLoad](#onload)
          * [onDestroy](#ondestroy)
+         * [onSessionReset](#onsessionreset)
          * [onChatWindowOpen](#onchatwindowopen)
          * [onChatWindowClose](#onchatwindowclose)
          * [onChatWindowHide](#onchatwindowhide)
@@ -77,6 +78,18 @@ Callback function invoked after `destroy()` API method call.
 window.BE_API = window.BE_API || {};
 
 window.BE_API.onDestroy = function () {
+    // ...
+};
+```
+
+### onSessionReset
+
+Callback function invoked after `resetSession()` API method call.
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onSessionReset = function () {
     // ...
 };
 ```
