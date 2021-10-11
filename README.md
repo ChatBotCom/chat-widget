@@ -10,7 +10,7 @@
          * [onChatWindowClose](#onchatwindowclose)
          * [onChatWindowHide](#onchatwindowhide)
          * [onMessage](#onmessage)
-         * [onStartConversation](#onstartconversation)
+         * [onConversationStart](#onconversationstart)
          * [onConversationEnd](#onconversationend)
          * [onMomentOpen](#onmomentopen)
          * [onMomentClose](#onmomentclose)
@@ -143,14 +143,14 @@ window.BE_API.onMessage = function (result) {
 };
 ```
 
-### onStartConversation
+### onConversationStart
 
 Callback function invoked after the conversation starts.
 
 ```javascript
 window.BE_API = window.BE_API || {};
 
-window.BE_API.onStartConversation = function () {
+window.BE_API.onConversationStart = function () {
     // ...
 };
 ```
@@ -497,3 +497,4 @@ window.BE_API.onLoad = () => {
     window.BE_API.showGreeting('Greeting message')
 }
 ```
+
