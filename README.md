@@ -11,6 +11,7 @@
          * [onChatWindowHide](#onchatwindowhide)
          * [onMessage](#onmessage)
          * [onStartConversation](#onstartconversation)
+         * [onConversationEnd](#onconversationend)
          * [onMomentOpen](#onmomentopen)
          * [onMomentClose](#onmomentclose)
          * [onMomentLoad](#onmomentload)
@@ -150,6 +151,18 @@ Callback function invoked after the conversation starts.
 window.BE_API = window.BE_API || {};
 
 window.BE_API.onStartConversation = function () {
+    // ...
+};
+```
+
+### onConversationEnd
+
+Callback function invoked after the conversation ends.
+
+```javascript
+window.BE_API = window.BE_API || {};
+
+window.BE_API.onConversationEnd = function () {
     // ...
 };
 ```
