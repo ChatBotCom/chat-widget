@@ -356,6 +356,8 @@ window.BE_API.onLoad = () => {
 
 ### sendTrigger
 
+Only available for old builder scenarios.
+
 Trigger the specific interaction.
 
 #### Payload
